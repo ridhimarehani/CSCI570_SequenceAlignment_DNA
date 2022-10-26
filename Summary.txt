@@ -1,0 +1,41 @@
+                                            Sequence Alignment Problem
+
+--Introduction--
+The Sequence Alignment Problem is used to find the similarities between 2 different strings. It has a major contribution in biological advances since it helps in comparing the Amino acid sequences (DNA, RNA). Each strand is represented using 4 bases – A, C, G and T along with the gaps or there can be a string mismatch. Our aim is to find the similarity between the 2 strings.
+This problem has proven to be a useful tool which helps in areas like Gene recognition and evolution study.
+
+--Implementation--
+We have used the dynamic program recursive solution to solve this problem. Whenever the string mismatches we incur a gap penalty. For each mismatch between the two letters, we incur a mismatch cost. 
+
+For the 2 given strings X and Y,
+X = {x1, x2, ……, xm} and
+Y = {y1, y2, ……., yn}
+The subproblem can be defined as below:
+OPT(i,j) = The minimum cost of alignment between x1…..xi and y1 …….yj
+
+For an alignment ‘M’, mismatch cost ‘d’ and misalignment cost ‘α’, recurrence formula can be written as:
+1.	xm, yn ∈ M  => OPT(m,n) = OPT(m-1; n- 1) +   αxmyn
+2.	xm is not matched, OPT(m,n) = OPT(m-1, n) + d
+3.	yn is not matched, OPT(m,n) = OPT(m, n-1) + d
+
+We need to maintain a 2D memorization array for this problem. This gives the time and space complexity of O(mn). To reconstruct the alignment, we do a top-down traversal which costs O(m+n).
+Since the sequence alignment is performed on extremely large strings, the memorization array is large and can slow down our program significantly. In order to overcome this problem, we combine divide and conquer with dynamic programming.
+
+
+--Summary--
+
+Observation:
+The divide and conquer solution is more efficient in saving memory. 
+We divide the problem into 2 subproblems. We can divide X in the middle. But we don’t know yet where to split the string Y. We find the split point for Y using dynamic programming. Let X and Y be the two strings. We now divide X into XL and XR. We run the sequence alignment between XL and Y. The rightmost column will have the cost of alignment. We repeat the same thing for XR and YR. Then we add both, the rightmost columns and take the absolute minimum. This concludes the divide step.
+We now solve the subproblems recursively. Here, the combine step is just concatenation of both solutions.
+For the time complexity, we are doing only twice the number of computations compared to the DP problem. The number of computations done are ‘2cmn’. To have more space efficient solution, we just need 2 columns in both the subproblems. Hence space complexity is linear.
+
+
+Contribution:
+Implementation of Basic Sequence Alignment - Sukhada & Ridhima
+Implementation of Efficient Sequence Alignment - Anuska & Sukhada
+Report Creation - Ridhima
+Plot Generation - Sukhada 
+Testing - Anuska
+
+
